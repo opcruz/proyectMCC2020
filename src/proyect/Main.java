@@ -15,20 +15,17 @@ public class Main {
         do {
             switch (menu()) {
                 case 1:
-                    addPublicacion();
+                    addPublication();
                     break;
                 case 2:
-                    findPublicacion();
+                    findPublication();
                     break;
-
                 case 3:
-                    deletePublicacion();
+                    deletePublication();
                     break;
-
                 case 4:
-                    show();
+                    showPublications();
                     break;
-
                 case 5:
                     running = false;
                     break;
@@ -52,7 +49,7 @@ public class Main {
         return option;
     }
 
-    public static void addPublicacion() {
+    public static void addPublication() {
         int option;
         boolean repeat;
         do {
@@ -154,7 +151,7 @@ public class Main {
         list.add(periodico);
     }
 
-    public static void deletePublicacion() {
+    public static void deletePublication() {
         String title;
         int acc = 0;
         System.out.println();
@@ -173,24 +170,28 @@ public class Main {
         System.out.println();
     }
 
-    public static void findPublicacion() {
+    public static void findPublication() {
         String title;
         System.out.println();
         System.out.println("Ingrese el título de la  publicación a buscar:");
         title = nextLine();
         List<Publicacion> list1 = findByTitle(title);
-        show(list1);
+        showPublications(list1);
     }
 
-    public static void show() {
-        show(list);
+    public static void showPublications() {
+        showPublications(list);
     }
 
-    public static void show(List<Publicacion> l) {
+    public static void showPublications(List<Publicacion> l) {
         System.out.println("----------------------");
-        for (Publicacion pub : l) {
-            pub.printMetadata(System.out);
-            System.out.println("----------------------");
+        if (l.isEmpty()) {
+            System.out.println("No se encontraron publicaciones");
+        } else {
+            l.forEach(pub -> {
+                pub.printMetadata(System.out);
+                System.out.println("----------------------");
+            });
         }
         System.out.println();
     }
